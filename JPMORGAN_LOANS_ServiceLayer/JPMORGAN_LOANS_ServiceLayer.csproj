@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JPMORGAN_LOANS_BusinessEntities\JPMORGAN_LOANS_BusinessEntities.csproj" />
     <ProjectReference Include="..\JPMORGAN_LOANS_RepositoryLayer\JPMORGAN_LOANS_RepositoryLayer.csproj" />
   </ItemGroup>

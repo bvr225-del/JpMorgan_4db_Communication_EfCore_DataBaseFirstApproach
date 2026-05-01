@@ -1,4 +1,5 @@
-﻿using JPMORGAN_LOANS_BusinessEntities.Dtos;
+﻿using AutoMapper;
+using JPMORGAN_LOANS_BusinessEntities.Dtos;
 using JPMORGAN_LOANS_BusinessEntities.hotelmanagementModels;
 using JPMORGAN_LOANS_BusinessEntities.Interfaces;
 using System;
@@ -13,9 +14,12 @@ namespace JPMORGAN_LOANS_ServiceLayer
     {
         #region Constructor Injection for IEmployeeRepository
         private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        private readonly IMapper _mapper;
+
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
         {
             _employeeRepository = employeeRepository;
+            this._mapper = mapper;
         }
         #endregion
 
@@ -23,9 +27,14 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<int> AddEmployes(EmployeeDto empdetail)
         {
             Employee emp = new Employee();
-            emp.Empid = empdetail.Empid;
-            emp.Empsalary = empdetail.Empsalary;
-            emp.Empname = empdetail.Empname;
+            //destinationmodelclass object
+            //This Code was replaced by above Automapper concept.
+            // 1)Auto mapper is used to create a mapping between  to source model object to destination model object
+
+            _mapper.Map(empdetail, emp);// sourceobject,destinationobject
+            //Converting source modelobject to destination modelobject
+            //Syntax:   _mapper.Map(SourceModelObject,DestinationModelObject)
+            //once mapping is created, source model object can be converted to destination model object with less code and easy way.
             var res = await _employeeRepository.AddEmployes(emp);
             return res;
         }
@@ -43,11 +52,9 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<EmployeeDto> GetEmployeeById(int empid)
         {
             var res = await _employeeRepository.GetEmployeeById(empid);
-            EmployeeDto empdto = new EmployeeDto();
-            empdto.Empid = res.Empid;
-            empdto.Empname = res.Empname;
-            empdto.Empsalary = res.Empsalary;
-            return empdto;
+            // 1)Auto mapper is used to create a mapping between  to source model object to destination model object        
+            return _mapper.Map<EmployeeDto>(res);//entity to dto mapping
+                                                 //in Service layer we are using Dto(Data transfer object) classes and return the data of Dto class object data.
         }
         #endregion
 
@@ -55,18 +62,8 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<List<EmployeeDto>> GetEmployees()
         {
 
-            List<EmployeeDto> lstempdto = new List<EmployeeDto>();
             var res = await _employeeRepository.GetEmployees();
-            foreach (Employee emp in res)
-            {
-                EmployeeDto empdto = new EmployeeDto();
-                empdto.Empid = emp.Empid;
-                empdto.Empsalary = emp.Empsalary;
-                empdto.Empname = emp.Empname;
-                lstempdto.Add(empdto);
-
-            }
-            return lstempdto;
+            return _mapper.Map<List<EmployeeDto>>(res);//entity to dto mapping
         }
         #endregion
 
@@ -74,12 +71,38 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<bool> UpdateEmploye(EmployeeDto empdetail)
         {
             Employee emp = new Employee();
-            emp.Empid = empdetail.Empid;
-            emp.Empsalary = empdetail.Empsalary;
-            emp.Empname = empdetail.Empname;
+            _mapper.Map(empdetail, emp);
             await _employeeRepository.UpdateEmploye(emp);
             return true;
         }
         #endregion
     }
 }
+#region AutoMapper concept
+/* 1.what is Automapper?
+ 1)Auto mapper is used to create a mapping between  to source model object to destination model object
+
+ 2)once mapping is created, source model object can be converted to destination model object with less code and easy way.
+ 
+ 3)Auto mapper can be instaled by using NUEGet Manage packager.
+ 
+ 4) This required two steps:
+
+        1) creating mapping
+         
+      syntax: mapper.createmap < sourcemodel object,destination modelobject >();
+            
+           Here <> Means We called as a Placeholder .
+
+         2) Converting source modelobject to destination modelobject
+
+          destination modelclass Reference variable= Mapper.Map<destination modelclassname>(source modelclasspbject)
+
+//===================================================
+
+//Converting source modelobject to destination modelobject
+//Syntax:   _mapper.Map(SourceModelObject,DestinationModelObject)
+//once mapping is created, source model object can be converted to destination model object with less code and easy way.
+================
+*/
+#endregion

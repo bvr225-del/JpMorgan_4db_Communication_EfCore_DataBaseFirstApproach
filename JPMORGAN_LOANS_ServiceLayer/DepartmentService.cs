@@ -1,4 +1,5 @@
-﻿using JPMORGAN_LOANS_BusinessEntities.Dtos;
+﻿using AutoMapper;
+using JPMORGAN_LOANS_BusinessEntities.Dtos;
 using JPMORGAN_LOANS_BusinessEntities.Interfaces;
 using JPMORGAN_LOANS_BusinessEntities.NorthWind_DbModels;
 using System;
@@ -13,10 +14,13 @@ namespace JPMORGAN_LOANS_ServiceLayer
     {
         #region Constructor Injection for IDepartmentRepository
         private readonly IDepartmentRepository _repository;
+        private readonly IMapper _mapper;
+
         //constructor injection
-        public DepartmentService(IDepartmentRepository repository)
+        public DepartmentService(IDepartmentRepository repository,IMapper mapper)
         {
             _repository = repository;
+            this._mapper = mapper;
         }
         #endregion
 
@@ -25,9 +29,7 @@ namespace JPMORGAN_LOANS_ServiceLayer
         {
             //In future this code was replaced by automapper conncept.
             Department dept = new Department();
-            dept.Deptid = deptdetail.Deptid;
-            dept.Deptname = deptdetail.Deptname;
-            dept.Deptlocation = deptdetail.Deptlocation;
+            _mapper.Map(deptdetail, dept);
             var res = await _repository.AddDepartments(dept);
             return res;
         }
@@ -47,30 +49,15 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<DepartmentDto> GetDepartmentById(int deptid)
         {
             var res = await _repository.GetDepartmentById(deptid);
-            DepartmentDto deptdto = new DepartmentDto();
-            deptdto.Deptid = res.Deptid;//Here i am mapping entity object properties to Dto Object properties.
-            deptdto.Deptname = res.Deptname;
-            deptdto.Deptlocation = res.Deptlocation;
-            return deptdto;
+            return _mapper.Map<DepartmentDto>(res);
         }
         #endregion
 
         #region GetDepartments
         public async Task<List<DepartmentDto>> GetDepartments()
         {
-            List<DepartmentDto> lstdeptdto = new List<DepartmentDto>();
             var res = await _repository.GetDepartments();
-            foreach (Department dept in res)
-            {
-
-                DepartmentDto deptdto = new DepartmentDto();
-                deptdto.Deptid = dept.Deptid;//Here i am mapping entity object properties to Dto Object properties.
-                deptdto.Deptname = dept.Deptname;
-                deptdto.Deptlocation = dept.Deptlocation;
-                lstdeptdto.Add(deptdto);
-
-            }
-            return lstdeptdto;
+            return _mapper.Map<List<DepartmentDto>>(res);
         }
         #endregion
 
@@ -79,9 +66,7 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<bool> UpdateDepartment(DepartmentDto deptdetail)
         {
             Department dept = new Department();
-            dept.Deptid = deptdetail.Deptid;
-            dept.Deptname = deptdetail.Deptname;
-            dept.Deptlocation = deptdetail.Deptlocation;
+            _mapper.Map(deptdetail, dept);
             await _repository.UpdateDepartment(dept);
             return true;
         }

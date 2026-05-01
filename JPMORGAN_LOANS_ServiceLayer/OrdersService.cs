@@ -1,6 +1,8 @@
-﻿using JPMORGAN_LOANS_BusinessEntities.Dtos;
+﻿using AutoMapper;
+using JPMORGAN_LOANS_BusinessEntities.Dtos;
 using JPMORGAN_LOANS_BusinessEntities.Interfaces;
 using JPMORGAN_LOANS_BusinessEntities.MidlandModels;
+using JPMORGAN_LOANS_RepositoryLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,13 @@ namespace JPMORGAN_LOANS_ServiceLayer
     {
         #region Constructor Injection for IOrdersRepository
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IMapper _mapper;
 
-        public OrdersService(IOrdersRepository ordersRepository)
+
+        public OrdersService(IOrdersRepository ordersRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository;
+            this._mapper = mapper;
         }
         #endregion
 
@@ -25,9 +30,7 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<int> AddOrder(OrderDto orderdetail)
         {
             Order order = new Order();
-            order.Orderid = orderdetail.Orderid;
-            order.Ordername = orderdetail.Ordername;
-            order.Orderlocation = orderdetail.Orderlocation;
+            _mapper.Map(orderdetail, order);
             var res = await _ordersRepository.AddOrder(order);
             return res;
         }
@@ -47,11 +50,7 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<OrderDto> GetOrderById(int orderid)
         {
             var res = await _ordersRepository.GetOrderById(orderid);
-            OrderDto orderdto = new OrderDto();
-            orderdto.Orderid = res.Orderid;
-            orderdto.Ordername = res.Ordername;
-            orderdto.Orderlocation = res.Orderlocation;
-            return orderdto;
+            return _mapper.Map<OrderDto>(res);
         }
         #endregion
 
@@ -59,19 +58,8 @@ namespace JPMORGAN_LOANS_ServiceLayer
 
         public async Task<List<OrderDto>> GetOrders()
         {
-            List<OrderDto> lstorderdto = new List<OrderDto>();
             var res = await _ordersRepository.GetOrders();
-            foreach (Order order in res)
-            {
-                OrderDto ordersDto = new OrderDto();
-                ordersDto.Orderid = order.Orderid;
-                ordersDto.Ordername = order.Ordername;
-                ordersDto.Orderlocation = order.Orderlocation;
-
-                lstorderdto.Add(ordersDto);//Add the orders to list here
-
-            }
-            return lstorderdto;
+            return _mapper.Map<List<OrderDto>>(res);
         }
         #endregion
 
@@ -80,9 +68,7 @@ namespace JPMORGAN_LOANS_ServiceLayer
         public async Task<bool> UpdateOrder(OrderDto orderdetail)
         {
             Order obj = new Order();
-            obj.Orderid = orderdetail.Orderid;
-            obj.Ordername = orderdetail.Ordername;
-            obj.Orderlocation = orderdetail.Orderlocation;
+            _mapper.Map(orderdetail, obj);
             await _ordersRepository.UpdateOrder(obj);
             return true;
         }
