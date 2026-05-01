@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Order = JPMORGAN_LOANS_BusinessEntities.MidlandModels.Order;
+using Employee = JPMORGAN_LOANS_BusinessEntities.hotelmanagementModels.Employee;
 
 namespace JPMORGAN_LOANS_ServiceLayer.AutoMapper
 {
@@ -21,7 +23,7 @@ namespace JPMORGAN_LOANS_ServiceLayer.AutoMapper
             // Example:
             // CreateMap<UserEntity, UserDTO>();
             //===========================================
-            CreateMap<EmployeeDto, Employee>();//this is used to map the data of EmployeeDto class object to Employee class object
+            CreateMap<EmployeeDto,Employee>();//this is used to map the data of EmployeeDto class object to Employee class object
             CreateMap<Employee, EmployeeDto>();//this is used to map the data of Employee class object to EmployeeDto class object
             CreateMap<DepartmentDto, Department>();//this is used to map the data of DepartmentDto class object to Department class object
             CreateMap<Department, DepartmentDto>();//this is used to map the data of Department class object to DepartmentDto class object
