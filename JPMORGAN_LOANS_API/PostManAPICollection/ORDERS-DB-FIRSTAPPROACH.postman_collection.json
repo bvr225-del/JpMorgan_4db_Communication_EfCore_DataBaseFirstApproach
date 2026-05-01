@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "db166b42-6b2c-47e6-9c95-821d3b9c547c",
+    "name": "ORDERS-DB-FIRSTAPPROACH",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53440198",
+    "_collection_link": "https://go.postman.co/collection/53440198-db166b42-6b2c-47e6-9c95-821d3b9c547c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "POST API",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"orderid\": 0,\r\n  \"ordername\": \"SOFASET\",\r\n  \"orderlocation\": \"DELHI\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5140/api/Orders/AddOrder",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Orders",
+            "AddOrder"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Orders/GetOrders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Orders",
+            "GetOrders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET BY ID API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Orders/GetOrderByOrderid/2005",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Orders",
+            "GetOrderByOrderid",
+            "2005"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT API",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"orderid\": 2005,\r\n  \"ordername\": \"APPLE IPHONE123\",\r\n  \"orderlocation\": \"HYDERABAD123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5140/api/Orders/UpdateOrder",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Orders",
+            "UpdateOrder"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE API",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Orders/DeleteOrderByOrderid/2005",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Orders",
+            "DeleteOrderByOrderid",
+            "2005"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
