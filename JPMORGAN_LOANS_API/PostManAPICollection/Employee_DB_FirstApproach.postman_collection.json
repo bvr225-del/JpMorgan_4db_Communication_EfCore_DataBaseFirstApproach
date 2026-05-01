@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "81ce1eae-9799-4e01-8800-e603e004bf92",
+    "name": "Employee_DB_FirstApproach",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53440198",
+    "_collection_link": "https://go.postman.co/collection/53440198-81ce1eae-9799-4e01-8800-e603e004bf92?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "POST API",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"empid\": 0,\r\n  \"empname\": \"rahul\",\r\n  \"empsalary\": 10000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5140/api/Employee/AddEmployee",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Employee",
+            "AddEmployee"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE API",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Employee/DeleteEmployeeByEmpid/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Employee",
+            "DeleteEmployeeByEmpid",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Employee/GetEmployee",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Employee",
+            "GetEmployee"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GETBYID API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5140/api/Employee/GetEmployeeByEmpid/4009",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Employee",
+            "GetEmployeeByEmpid",
+            "4009"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT API",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"empid\": 4009,\r\n  \"empname\": \"Sachin Tendulkar\",\r\n  \"empsalary\":100000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5140/api/Employee/UpdateEmployee",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5140",
+          "path": [
+            "api",
+            "Employee",
+            "UpdateEmployee"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
