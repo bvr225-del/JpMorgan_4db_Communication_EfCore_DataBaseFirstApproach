@@ -23,6 +23,7 @@ namespace JPMORGAN_LOANS_ServiceLayer.AutoMapper
             // Example:
             // CreateMap<UserEntity, UserDTO>();
             //===========================================
+            #region AutoMapper configuration for Employee, Department, Order and Restaurant
             CreateMap<EmployeeDto,Employee>();//this is used to map the data of EmployeeDto class object to Employee class object
             CreateMap<Employee, EmployeeDto>();//this is used to map the data of Employee class object to EmployeeDto class object
             CreateMap<DepartmentDto, Department>();//this is used to map the data of DepartmentDto class object to Department class object
@@ -31,7 +32,7 @@ namespace JPMORGAN_LOANS_ServiceLayer.AutoMapper
             CreateMap<Order, OrderDto>();//this is used to map the data of Order class object to OrderDto class object
             CreateMap<RestaurantDto, Restaurant>();//this is used to map the data of RestaurantDto class object to Restaurant class object
             CreateMap<Restaurant, RestaurantDto>();//this is used to map the data of Restaurant class object to RestaurantDto class object
-
+            #endregion
 
 
         }
