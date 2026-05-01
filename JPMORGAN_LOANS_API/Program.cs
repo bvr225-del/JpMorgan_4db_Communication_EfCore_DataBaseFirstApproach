@@ -45,6 +45,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantDbFirs
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 //=======================***************************************************************************
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+//=======================***************************************************************************
 
 
 var app = builder.Build();
