@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JPMORGAN_LOANS_BusinessEntities\JPMORGAN_LOANS_BusinessEntities.csproj" />
+    <ProjectReference Include="..\JPMORGAN_LOANS_DbConnectivity\JPMORGAN_LOANS_DbConnectivity.csproj" />
+  </ItemGroup>
+
 </Project>
